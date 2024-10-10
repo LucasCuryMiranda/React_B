@@ -7,7 +7,19 @@ function CadastroUser(){
 
     async function salvar(){
 
-        let api = await fetch('https://viacep.com.br/ws/'+email+'/json/');
+        let api = await fetch("http://localhost:8000/api/users",{
+            method:"POST",
+            body:JSON.stringify({
+                "name":"Carlos",
+                "email":email,
+                "password":"123434",
+                "isActive":1,
+                "document":"21342345"
+            }),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
 
         let resposta = await api.json();
 
@@ -26,7 +38,10 @@ function CadastroUser(){
             
                 <h2>Cadastre-se</h2>
                 <label htmlFor="nome">Nome</label>
-                <input type="text" name ='nome' id='nome'/>
+                <input type="text" 
+                name ='nome' 
+                id='nome'
+                />
 
                 <label htmlFor="email">Email</label>
                 <input 
@@ -45,7 +60,11 @@ function CadastroUser(){
                 />
 
                 <label htmlFor='senha'>Senha</label>
-                <input type='password' name ='senha' id='senha'/>
+                <input 
+                type='password' 
+                name ='senha' 
+                id='senha'
+                />
 
                 <input onClick= {salvar} type='button' value='Cadastrar'/>
 
